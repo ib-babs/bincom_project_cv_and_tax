@@ -1,0 +1,25 @@
+﻿@model MyCV.Models.TaxCalculationModel
+@{
+    ViewData["Title"] = "Nigeria Tax Calculator";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="TaxCalculation" method="post">
+    <div asp-validation-summary="All"></div>
+    <label asp-for="Income">Annual Income:</label>
+    <input type="number" asp-for="Income" required placeholder="Enter your annual income."/>
+    <input type="submit" value="Calculate" class="btn btn-primary">
+</form>
+@if (Context.Request.Method == "POST")
+{
+    @:<p class="mt-5">
+    @if (Model.Income >= 260000)
+    {
+        @:Your tax is: <b>@Convert.ToDecimal(Model.Calculator(Model.Income))</b>
+   }
+    else
+    {
+        @:No tax.
+    }
+    @:</p>
+}

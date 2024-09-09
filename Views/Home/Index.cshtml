@@ -1,0 +1,122 @@
+﻿@model MyCV.Models.CV
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="main">
+<div class="header" style="text-align: center;">
+
+    <h1>
+        @Model.Name
+    </h1>
+    <p style="padding-bottom: 5px; border-bottom: 2px solid black;">
+        <span>Address: @Model.Contacts["Address"]</span> ||
+        <span>Phone: <a target="_blank" href='tel:@Model.Contacts["Phone"]'>@Model.Contacts["Phone"]</a></span> ||
+        <span>Email: <a target="_blank" href='mailto:@Model.Contacts["Email"]'>@Model.Contacts["Email"]</a></span> ||
+        <span>Twitter: <a target="_blank" href='@Model.Contacts["Twitter"]'>BKhalilullahi</a></span> ||
+        <span>Portfolio: <a target="_blank" href='@Model.Contacts["Portfolio"]'>Ibrahim Babatunde</a></span> ||
+        <span>Github: <a target="_blank" href='@Model.Contacts["Github"]'>Ib-babs</a></span> 
+    </p>
+</div>
+
+<div class="summary">
+
+    <h6><b>SUMMARY</b></h6>
+    <p>@Model.Summary</p>
+
+</div>
+
+<div class="education">
+    <h6><b>EDUCATION</b></h6>
+    <ul>
+        @foreach (Dictionary<string, string> education in Model.Education)
+        {
+            <li class="pb-2">
+
+                <span><b>@education["School"]</b></span><br>
+                <span>@education["Location"]</span><br>
+                <span>@education["CertificateObtained"]</span><br>
+                <span> <i>@education["From - To"]</i></span>
+            </li>
+        }
+    </ul>
+
+</div>
+
+<div class="experience">
+    <h6><b>EXPERIENCE</b></h6>
+    <ul>
+        @for (int i = 0; i < Model.Experience.Count; i++)
+        {
+            
+            <li class="pb-2">
+
+                <span><b>@Model.Experience[i]["Title"]</b></span><br>
+
+                @if (Model.Experience[i].ContainsKey("Seminar Location") == true)
+                {
+
+                    @:<span>@Model.Experience[i]["Seminar Location"]</span> - <span> <i>@Model.Experience[i]["Date"]</i></span><br>
+                    <span>@Model.Experience[i]["Location"]</span>
+                    <br>
+                }
+                else
+                {
+                    @:<span>@Model.Experience[i]["Location"]</span> - <span> <i>@Model.Experience[i]["Date"]</i></span><br>
+
+                }
+                <ul>
+                @foreach (string role in Model.ExperienceRole[i][Model.Experience[i]["Title"]])
+                {
+                    <li>@role</li>
+                } 
+                    </ul>
+
+                
+
+            </li>
+        }
+    </ul>
+
+</div>
+
+
+<div class="project">
+    <h6><b>PROJECTS</b></h6>
+    <ul>
+        @foreach (KeyValuePair<string, string> project in Model.Projects)
+        {
+            <li class="pb-2">
+                <span><b>@project.Key</b></span><br>
+                @project.Value
+            </li>
+        }
+    </ul>
+</div>
+
+<div class="skills">
+
+    <h6><b>SKILLS</b></h6>
+    <ul>
+        @foreach (string skill in Model.Skills)
+        {
+            <li>
+                @skill
+            </li>
+        }
+    </ul>
+</div>
+
+<div class="languages">
+
+    <h6><b>LANGUAGES</b></h6>
+    <ul>
+        @foreach (string language in Model.Languages)
+        {
+            <li>
+                @language
+            </li>
+        }
+    </ul>
+</div>
+</div>
