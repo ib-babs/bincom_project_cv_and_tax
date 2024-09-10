@@ -15,7 +15,7 @@
     @:<p class="mt-5">
     @if (Model.Income >= 260000)
     {
-        @:Your tax is: <b>@Convert.ToDecimal(Model.Calculator(Model.Income))</b>
+        @:Your tax is: <b>N</b><b>@Convert.ToDecimal(Model.Calculator(Model.Income)).ToString("N")</b>
    }
     else
     {
